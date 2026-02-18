@@ -1,0 +1,19 @@
+.blog-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    flex: 1;
+    border: 1px solid gray;
+    padding: 15px;
+    background-color:#E8E2DB;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column;
+    }
+}
