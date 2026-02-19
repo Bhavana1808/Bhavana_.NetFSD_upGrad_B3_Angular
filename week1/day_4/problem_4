@@ -8,29 +8,39 @@
 
     <h1>Traffic Signal Simulator</h1>
 
+    <label>Enter Signal Color (red, yellow, green): </label>
+    <input type="text" id="signal">
+    <button onclick="checkSignal()">Check</button>
+
+    <p id="result"></p>
+
     <script>
 
-        let signal = "red";
+        function checkSignal() {
 
-        switch (signal) {
+            let signal = document.getElementById("signal").value.toLowerCase();
+            let message;
 
-            case "red":
-                console.log("Signal: Red");
-                console.log("Instruction: Stop");
-                break;
+            switch (signal) {
 
-            case "yellow":
-                console.log("Signal: Yellow");
-                console.log("Instruction: Get Ready");
-                break;
+                case "red":
+                    message = "Stop";
+                    break;
 
-            case "green":
-                console.log("Signal: Green");
-                console.log("Instruction: Go");
-                break;
+                case "yellow":
+                    message = "Get Ready";
+                    break;
 
-            default:
-                console.log("Invalid Signal");
+                case "green":
+                    message = "Go";
+                    break;
+
+                default:
+                    message = "Invalid Signal Color";
+            }
+
+            document.getElementById("result").innerHTML =
+                "Signal: " + signal + "<br>Instruction: " + message;
         }
 
     </script>
