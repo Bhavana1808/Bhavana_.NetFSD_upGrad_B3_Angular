@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Signal Simulator</title>
+</head>
+<body>
+
+    <h1>Traffic Signal Simulator</h1>
+
+    <script>
+
+        let signal = "red";
+
+        switch (signal) {
+
+            case "red":
+                console.log("Signal: Red");
+                console.log("Instruction: Stop");
+                break;
+
+            case "yellow":
+                console.log("Signal: Yellow");
+                console.log("Instruction: Get Ready");
+                break;
+
+            case "green":
+                console.log("Signal: Green");
+                console.log("Instruction: Go");
+                break;
+
+            default:
+                console.log("Invalid Signal");
+        }
+
+    </script>
+
+</body>
+</html>
