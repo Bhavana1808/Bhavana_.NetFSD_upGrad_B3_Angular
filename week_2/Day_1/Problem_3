@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Location Logger</title>
+</head>
+<body onload="loadHistory()">
+
+<button onclick="getLocation()">Get My Location</button>
+
+<h3>Current Location</h3>
+<p id="location"></p>
+
+<h3>Location History</h3>
+<ul id="history"></ul>
+
+<script>
+function getLocation()
+{
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+}
+
+function showPosition(position)
+{
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    document.getElementById("location").innerHTML =
+    "Latitude: " + lat + " Longitude: " + lon;
+
+    let locations = JSON.parse(localStorage.getItem("locations")) || [];
+
+    locations.push({lat, lon});
+
+    if(locations.length > 5)
+        locations.shift();
+
+    localStorage.setItem("locations", JSON.stringify(locations));
+
+    loadHistory();
+}
+
+function showError(error)
+{
+    alert("Error getting location");
+}
+
+function loadHistory()
+{
+    let locations = JSON.parse(localStorage.getItem("locations")) || [];
+    let list = document.getElementById("history");
+    list.innerHTML = "";
+
+    locations.forEach(loc => {
+        let li = document.createElement("li");
+        li.innerHTML = loc.lat + " , " + loc.lon;
+        list.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>
