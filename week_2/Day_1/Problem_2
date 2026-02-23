@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Form Validation</title>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+Name:
+<input type="text" id="name" onchange="validateName()">
+<span id="nmsg"></span>
+<br><br>
+
+Email:
+<input type="text" id="email" onchange="validateEmail()">
+<span id="emsg"></span>
+<br><br>
+
+Age:
+<input type="number" id="age" onchange="validateAge()">
+<span id="amsg"></span>
+<br><br>
+
+<button onclick="saveData()">Submit</button>
+
+<script>
+function validateName()
+{
+    let name = document.getElementById("name").value;
+    if(name == "")
+        document.getElementById("nmsg").innerHTML = "Name required";
+    else
+        document.getElementById("nmsg").innerHTML = "Valid";
+}
+
+function validateEmail()
+{
+    let email = document.getElementById("email").value;
+    if(email.includes("@"))
+        document.getElementById("emsg").innerHTML = "Valid";
+    else
+        document.getElementById("emsg").innerHTML = "Invalid Email";
+}
+
+function validateAge()
+{
+    let age = document.getElementById("age").value;
+    if(age > 18)
+        document.getElementById("amsg").innerHTML = "Valid";
+    else
+        document.getElementById("amsg").innerHTML = "Must be above 18";
+}
+
+function saveData()
+{
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let age = document.getElementById("age").value;
+
+    sessionStorage.setItem("username", name);
+    sessionStorage.setItem("useremail", email);
+    sessionStorage.setItem("userage", age);
+
+    alert("Data Saved in Session!");
+}
+</script>
+
+</body>
+</html>
