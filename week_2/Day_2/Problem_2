@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Cart Summary</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+        button { padding: 8px 15px; }
+    </style>
+</head>
+<body>
+
+<h2>Product Cart Summary</h2>
+
+<button onclick="generateInvoice()">Generate Invoice</button>
+
+<div id="invoice"></div>
+
+<script>
+
+const generateInvoice = () => {
+
+    const products = [
+        { name: "Laptop", price: 50000, quantity: 1 },
+        { name: "Mouse", price: 500, quantity: 2 },
+        { name: "Keyboard", price: 1500, quantity: 1 }
+    ];
+
+    const detailedItems = products.map(product => {
+        return {
+            name: product.name,
+            price: product.price,
+            quantity: product.quantity,
+            total: product.price * product.quantity
+        };
+    });
+
+    const grandTotal = detailedItems.reduce(
+        (sum, item) => sum + item.total,
+        0
+    );
+
+    let output = `
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+    `;
+
+    detailedItems.forEach(item => {
+        output += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${item.quantity}</td>
+                <td>${item.total}</td>
+            </tr>
+        `;
+    });
+
+    output += `
+            <tr>
+                <th colspan="3">Grand Total</th>
+                <th>${grandTotal}</th>
+            </tr>
+        </table>
+    `;
+
+    document.getElementById("invoice").innerHTML = output;
+};
+
+</script>
+
+</body>
+</html>
