@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle Inheritance Example</title>
+</head>
+<body>
+
+<h2>Vehicle Management System</h2>
+<div id="output"></div>
+<script>
+
+class Vehicle {
+
+    constructor(brand, speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+
+    displayInfo() {
+        return "Brand: " + this.brand + "<br>" +
+               " Speed: " + this.speed + " km/h";
+    }
+}
+
+class Car extends Vehicle {
+
+    constructor(brand, speed, fuelType) {
+        super(brand, speed);  // calling parent constructor
+        this.fuelType = fuelType;
+    }
+
+    showCarDetails() {
+        return this.displayInfo() + "<br>" +
+               " Fuel Type: " + this.fuelType;
+    }
+}
+
+// Create object
+let car1 = new Car("Toyota", 120, "Petrol");
+let result = car1.displayInfo() + "<br><br>" + car1.showCarDetails();
+
+document.getElementById("output").innerHTML = result;
+
+</script>
+
+</body>
+</html>
