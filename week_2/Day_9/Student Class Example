@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Class Example</title>
+</head>
+<body>
+
+<h2>Student Details</h2>
+<div id="output"></div>
+<script>
+
+class Student {
+
+    constructor(name, rollNumber, marks) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.marks = marks;
+    }
+
+    getDetails() {
+        return "Name: " + this.name + "<br>" +
+               " Roll No: " + this.rollNumber + "<br>" +
+               " Marks: " + this.marks; "<br>" 
+    }
+
+    getGrade() {
+        if (this.marks >= 90) {
+            return "A";
+        }
+        else if (this.marks >= 75) {
+            return "B";
+        }
+        else if (this.marks >= 50) {
+            return "C";
+        }
+        else {
+            return "Fail";
+        }
+    }
+}
+
+// Creating objects
+let student1 = new Student("Bhavana", 101, 92);
+let student2 = new Student("Koushik", 102, 68);
+let result =
+    student1.getDetails() + " - Grade: " + student1.getGrade() + "<br><br>" +
+    student2.getDetails() + " - Grade: " + student2.getGrade();
+
+document.getElementById("output").innerHTML = result;
+</script>
+
+</body>
+</html>
