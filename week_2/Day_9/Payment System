@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment System</title>
+</head>
+<body>
+
+<h2>Payment System Example</h2>
+<div id="output"></div>
+<script>
+
+class Payment {
+    pay(amount) {
+        return "Processing payment of ₹" + amount;
+    }
+}
+
+class CreditCardPayment extends Payment {
+    pay(amount) {
+        return "Paid ₹" + amount + " using Credit Card";
+    }
+}
+
+class UPIPayment extends Payment {
+    pay(amount) {
+        return "Paid ₹" + amount + " using UPI";
+    }
+}
+
+class CashPayment extends Payment {
+    pay(amount) {
+        return "Paid ₹" + amount + " using Cash";
+    }
+}
+
+// Creating objects
+let payment1 = new CreditCardPayment();
+let payment2 = new UPIPayment();
+let payment3 = new CashPayment();
+
+let result =
+    payment1.pay(500) + "<br><br>" +
+    payment2.pay(1000) + "<br><br>" +
+    payment3.pay(300);
+
+document.getElementById("output").innerHTML = result;
+
+</script>
+
+</body>
+</html>
