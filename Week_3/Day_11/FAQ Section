@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Section</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .answer { display: none; margin-left: 20px; }
+        .highlight { color: blue; font-weight: bold; }
+        .question { cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq">
+    <p class="question">1. What is jQuery?</p>
+    <p class="answer">jQuery is a JavaScript library.</p>
+
+    <p class="question">2. Why use jQuery?</p>
+    <p class="answer">It simplifies DOM manipulation.</p>
+
+    <p class="question">3. What is slideToggle?</p>
+    <p class="answer">It shows and hides content smoothly.</p>
+
+    <p class="question">4. Is jQuery still used?</p>
+    <p class="answer">Yes, in many legacy systems.</p>
+
+    <p class="question">5. How to include jQuery?</p>
+    <p class="answer">Using CDN link in script tag.</p>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $(".question").click(function(){
+         $(".answer").hide();
+        $(this).next(".answer").slideToggle();
+        $(this).toggleClass("highlight");
+       
+    });
+
+});
+</script>
+
+</body>
+</html>
