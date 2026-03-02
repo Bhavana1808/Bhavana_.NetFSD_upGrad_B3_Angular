@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Cart</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   
+</head>
+<body>
+
+<h2>Cart Items: <span id="cartCount">0</span></h2>
+
+<div class="product">
+    <p>Laptop <button class="addBtn">Add to Cart</button> <span class="msg"></span></p>
+</div>
+
+<div class="product">
+    <p>Headsets <button class="addBtn">Add to Cart</button> <span class="msg"></span></p>
+</div>
+
+<div class="product">
+    <p>Mobile <button class="addBtn">Add to Cart</button> <span class="msg"></span></p>
+</div>
+
+<div class="product">
+    <p>Power Bank <button class="addBtn">Add to Cart</button> <span class="msg"></span></p>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    let count = 0;
+
+    $(".addBtn").click(function(){
+
+        count++;
+        $("#cartCount").text(count);
+
+        $(this).prop("disabled", true);
+        $(this).next(".msg").text("Added!");
+
+    });
+
+});
+</script>
+
+</body>
+</html>
