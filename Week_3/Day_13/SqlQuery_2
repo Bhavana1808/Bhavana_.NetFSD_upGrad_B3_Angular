@@ -1,4 +1,3 @@
-
 CREATE DATABASE StoreDB;
 USE StoreDB;
 --1. Basic Customer Order Report
