@@ -1,0 +1,183 @@
+CREATE DATABASE EcommDb;
+USE EcommDb;
+
+CREATE TABLE Categories
+(
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+CREATE TABLE Brands
+(
+    brand_id INT PRIMARY KEY,
+    brand_name VARCHAR(50)
+);
+CREATE TABLE Products
+(
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    brand_id INT,
+    category_id INT,
+    model_year INT,
+    list_price DECIMAL(10,2),
+
+    FOREIGN KEY (brand_id) REFERENCES Brands(brand_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+CREATE TABLE Customers
+(
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    city VARCHAR(50),
+    phone VARCHAR(15)
+);
+CREATE TABLE Stores
+(
+    store_id INT PRIMARY KEY,
+    store_name VARCHAR(100),
+    city VARCHAR(50)
+);
+CREATE TABLE Staff
+(
+    staff_id INT PRIMARY KEY,
+    staff_name VARCHAR(100),
+    store_id INT,
+
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id)
+);
+CREATE TABLE Orders
+(
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    store_id INT,
+    staff_id INT,
+
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id),
+    FOREIGN KEY (staff_id) REFERENCES Staff(staff_id)
+);
+INSERT INTO Categories VALUES
+(1,'Mountain Bikes'),
+(2,'Road Bikes'),
+(3,'Electric Bikes'),
+(4,'Children Bikes'),
+(5,'Accessories');
+
+INSERT INTO Brands VALUES
+(1,'Trek'),
+(2,'Giant'),
+(3,'Specialized'),
+(4,'Scott'),
+(5,'Cannondale');
+
+INSERT INTO Products VALUES
+(1,'Trek Marlin 7',1,1,2023,75000),
+(2,'Giant Escape 3',2,2,2022,55000),
+(3,'Specialized Turbo Vado',3,3,2023,120000),
+(4,'Scott Roxter 24',4,4,2021,30000),
+(5,'Cannondale Trail 5',5,1,2022,68000);
+
+INSERT INTO Customers VALUES
+(1,'Ravi','Kumar','Hyderabad','9876543210'),
+(2,'Anjali','Reddy','Vijayawada','9123456780'),
+(3,'Kiran','Naidu','Hyderabad','9988776655'),
+(4,'Suresh','Babu','Guntur','9871122334'),
+(5,'Priya','Sharma','Hyderabad','9122233445');
+
+INSERT INTO Stores VALUES
+(1,'City Bike Store','Hyderabad'),
+(2,'Speed Wheels','Vijayawada'),
+(3,'Bike World','Guntur'),
+(4,'Urban Riders','Hyderabad'),
+(5,'Cycle Planet','Vizag');
+
+INSERT INTO Staff VALUES
+(1,'Rahul',1),
+(2,'Sneha',2),
+(3,'Arjun',3),
+(4,'Pooja',4),
+(5,'Manoj',5);
+
+INSERT INTO Orders VALUES
+(1,1,'2023-05-01',1,1),
+(2,2,'2023-06-10',2,2),
+(3,3,'2023-07-12',1,1),
+(4,4,'2023-08-15',3,3),
+(5,5,'2023-09-05',4,4);
+
+--Problem-1.
+--Retrieve all products with brand and category
+SELECT 
+p.product_name,
+b.brand_name,
+c.category_name
+FROM Products p
+JOIN Brands b
+ON p.brand_id = b.brand_id
+JOIN Categories c
+ON p.category_id = c.category_id;
+
+--Retrieve customers from a specific city
+SELECT *FROM Customers
+WHERE city='Hyderabad';
+
+--Total number of products in each category
+SELECT 
+c.category_name,
+COUNT(p.product_id) AS TotalProducts
+FROM Categories c
+LEFT JOIN Products p
+ON c.category_id = p.category_id
+GROUP BY c.category_name;
+
+--Problem-2
+--View 1 : Product Details
+GO
+CREATE VIEW vw_ProductDetails AS
+SELECT 
+p.product_name,
+b.brand_name,
+c.category_name,
+p.model_year,
+p.list_price
+FROM Products p
+JOIN Brands b
+ON p.brand_id=b.brand_id
+JOIN Categories c
+ON p.category_id=c.category_id;
+GO
+SELECT * FROM vw_ProductDetails;
+
+--View 2 : Order Summary
+GO
+CREATE VIEW vw_OrderSummary AS
+SELECT
+o.order_id,
+c.first_name + ' ' + c.last_name AS CustomerName,
+s.store_name,
+st.staff_name,
+o.order_date
+FROM Orders o
+JOIN Customers c
+ON o.customer_id=c.customer_id
+JOIN Stores s
+ON o.store_id=s.store_id
+JOIN Staff st
+ON o.staff_id=st.staff_id;
+GO
+SELECT * FROM vw_OrderSummary;
+
+--Create Indexes
+
+CREATE INDEX idx_product_brand
+ON Products(brand_id);
+
+CREATE INDEX idx_product_category
+ON Products(category_id);
+
+CREATE INDEX idx_order_customer
+ON Orders(customer_id);
+
+CREATE INDEX idx_order_store
+ON Orders(store_id);
