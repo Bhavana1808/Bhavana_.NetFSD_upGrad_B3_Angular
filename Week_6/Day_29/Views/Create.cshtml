@@ -1,0 +1,14 @@
+﻿@model WebApplication5.Models.Product
+
+<h2>Add Product</h2>
+
+<form method="post">
+    ID: <input asp-for="ProductId" /><br />
+    Name: <input asp-for="ProductName" /><br />
+    Price: <input asp-for="Price" /><br />
+    Category: <input asp-for="Category" /><br />
+
+    <button type="submit">Save</button>
+</form>
+
+<div asp-validation-summary="All"></div>

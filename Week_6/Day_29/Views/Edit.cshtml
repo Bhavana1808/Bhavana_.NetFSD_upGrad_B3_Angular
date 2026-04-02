@@ -1,0 +1,31 @@
+﻿@model WebApplication5.Models.Product
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    
+    <label>ID</label>
+    <input asp-for="ProductId" readonly />
+    <br />
+
+    <label>Name</label>
+    <input asp-for="ProductName" />
+    <span asp-validation-for="ProductName"></span>
+    <br />
+
+    <label>Price</label>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+    <br />
+
+    <label>Category</label>
+    <input asp-for="Category" />
+    <span asp-validation-for="Category"></span>
+    <br />
+
+    <button type="submit">Update</button>
+</form>
+
+<a href="/Product">Back to List</a>
+
+<div asp-validation-summary="All"></div>
