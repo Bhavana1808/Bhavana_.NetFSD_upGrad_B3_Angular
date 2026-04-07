@@ -1,0 +1,29 @@
+﻿@model Student
+
+<h2>Edit Student</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="StudentId" />
+
+    <div>
+        <label>Name</label>
+        <input asp-for="StudentName" />
+    </div>
+
+    <div>
+        <label>Course</label>
+        <select asp-for="CourseId">
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.CourseId"
+                        selected="@(course.CourseId == Model.CourseId)">
+                    @course.CourseName
+                </option>
+            }
+        </select>
+    </div>
+
+    <br />
+    <button type="submit">Update</button>
+</form>

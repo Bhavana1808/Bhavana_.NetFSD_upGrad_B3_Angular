@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Student>
+
+<h2>Students with Course</h2>
+
+<a href="/Student/Create" style="padding:8px; background:green; color:white; text-decoration:none;">
+    + Add New Student
+</a>
+
+<br />
+<br />
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Student</th>
+        <th>Course</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.StudentName</td>
+            <td>@item.Course.CourseName</td>
+            <td>
+                <a href="/Student/Edit/@item.StudentId">Edit</a> |
+                <a href="/Student/Delete/@item.StudentId"
+                       onclick="return confirm('Are you sure?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>

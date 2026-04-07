@@ -1,0 +1,29 @@
+﻿@model Student
+
+<h2>Add Student</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label>Student Name</label>
+        <input asp-for="StudentName" />
+    </div>
+
+    <div>
+        <label>Course</label>
+        <select asp-for="CourseId">
+            <option value="">--Select Course--</option>
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.CourseId">
+                    @course.CourseName
+                </option>
+            }
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit">Save</button>
+
+</form>
